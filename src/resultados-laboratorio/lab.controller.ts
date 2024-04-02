@@ -11,11 +11,13 @@ export class LabController {
 
   @Post()
   async createLab(@Body() data: any): Promise<any> {
-    const filePath = 'examen.pdf';
+    const currentDate = new Date();
+    console.log(currentDate);
+    const filePath = `examen.pdf`;
     const pdf = await this.pdfService.generatePdfFromHtml(data.template, filePath);
-    const chatId = 1147360782; // Reemplaza esto con el chatId real
-    const message = 'Hola desde backend!';
-    await this.telegramService.sendPdfDocument(chatId, filePath, caption);
+    const chatId = 2145695861; // Reemplaza esto con el chatId real
+    const message = 'Te enviamos un cordial saludo de parte del Laboratorio Clinico Loma Linda Carreño. Aquí te adjuntamos tus resultados de laboratorio.';
+    await this.telegramService.sendPdfDocument(chatId, filePath, message);
     return true;
   }
 }

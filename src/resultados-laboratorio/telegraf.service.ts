@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Telegraf } from 'telegraf';
+import * as fs from 'fs';
 
 @Injectable()
 export class TelegramService {
@@ -18,8 +19,8 @@ export class TelegramService {
     }
   }
 
-  async sendPdfDocument(chatId: string, filePath: string, caption: string): Promise<void> {
+  async sendPdfDocument(chatId: number, filePath: string, caption: string): Promise<void> {
     const documentStream = fs.createReadStream(filePath);
-    await this.bot.telegram.sendDocument(chatId, { source: documentStream, filename: 'example.pdf' }, { caption });
+    await this.bot.telegram.sendDocument(chatId, { source: documentStream, filename: filePath }, { caption });
   }
 }

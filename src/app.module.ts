@@ -7,6 +7,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Patient } from './patients/patient.model';
 import { PatientModule } from './patients/patient.module';
 import { ResultadosLaboratorioModule } from './resultados-laboratorio/resultados-laboratorio.module';
+import { inventaryModule } from './inventary/inventary.module';
 
 @Module({
   imports: [
@@ -22,7 +23,8 @@ import { ResultadosLaboratorioModule } from './resultados-laboratorio/resultados
       autoLoadEntities: true,
     }),
     PatientModule,
-    ResultadosLaboratorioModule
+    ResultadosLaboratorioModule,
+    inventaryModule
   ],
   controllers: [AppController],
   providers: [AppService],
