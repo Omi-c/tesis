@@ -1,13 +1,11 @@
 import { Controller, Get, Post, Body, Param, ParseIntPipe } from '@nestjs/common';
 import { Patient } from './patient.model';
 import { PatientService } from './patients.service';
-import { TelegramService } from 'src/patients/telegraf.service';
 
 @Controller('patients')
 export class PatientController {
   constructor(
     private readonly patientService: PatientService,
-    private readonly telegramService: TelegramService
   ) {}
 
   @Get()
@@ -22,9 +20,9 @@ export class PatientController {
 
   @Post()
   async createPatient(@Body() patientData: Patient): Promise<any> {
-    const chatId = 1147360782; // Reemplaza esto con el chatId real
-    const message = 'Hola desde backend!';
-    await this.telegramService.sendMessage(chatId, message);
+    // const chatId = 1147360782; // Reemplaza esto con el chatId real
+    // const message = 'Hola desde backend!';
+    // await this.telegramService.sendMessage(chatId, message);
     return this.patientService.create(patientData);
   }
 }
