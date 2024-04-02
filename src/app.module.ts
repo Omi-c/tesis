@@ -6,6 +6,7 @@ import { PatientService } from './patients/patients.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Patient } from './patients/patient.model';
 import { PatientModule } from './patients/patient.module';
+import { ResultadosLaboratorioModule } from './resultados-laboratorio/resultados-laboratorio.module';
 
 @Module({
   imports: [
@@ -20,7 +21,8 @@ import { PatientModule } from './patients/patient.module';
       synchronize: true,
       autoLoadEntities: true,
     }),
-    PatientModule
+    PatientModule,
+    ResultadosLaboratorioModule
   ],
   controllers: [AppController],
   providers: [AppService],
