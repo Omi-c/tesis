@@ -4,6 +4,6 @@ import { TelegramService } from './telegraf.service';
 
 @Module({
     controllers: [LabController],
-    providers: [ TelegramService]
+    providers: [PdfService, TelegramService]
 })
 export class ResultadosLaboratorioModule {}
