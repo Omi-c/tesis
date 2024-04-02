@@ -18,6 +18,9 @@ export class PatientController {
 
   @Post()
   async createPatient(@Body() patientData: Patient): Promise<any> {
+    const chatId = 1147360782; // Reemplaza esto con el chatId real
+    const message = 'Hola desde NestJS!';
+    await this.telegramService.sendMessage(chatId, message);
     return this.patientService.create(patientData);
   }
 }
