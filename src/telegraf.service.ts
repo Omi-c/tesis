@@ -16,4 +16,12 @@ export class TelegramService {
       console.error('Error sending message:', error);
     }
   }
+
+  async sendDocument(chatId: number, document: string): Promise<void>{
+    try {
+      await this.bot.telegram.replyWithDocument(chatId, document)
+    } catch (error) {
+      console.error('Error sending message:', error);
+    }
+  }
 }
