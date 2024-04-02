@@ -12,8 +12,8 @@ export class LabController {
   @Post()
   async createLab(@Body() data: any): Promise<any> {
     const currentDate = new Date();
-    console.log(currentDate);
     const filePath = `${data.patient}${currentDate.toISOString().replaceAll('-', '').replaceAll('.', '').replaceAll(':', '')}examen.pdf`;
+    const fullPath = join(__dirname, '..', 'public', filePath);
     const pdf = await this.pdfService.generatePdfFromHtml(data.template, filePath);
     await new Promise(resolve => setTimeout(resolve, 1000));
     const chatId = 2145695861; // Reemplaza esto con el chatId real

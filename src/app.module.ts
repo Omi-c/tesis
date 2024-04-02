@@ -8,6 +8,8 @@ import { Patient } from './patients/patient.model';
 import { PatientModule } from './patients/patient.module';
 import { ResultadosLaboratorioModule } from './resultados-laboratorio/resultados-laboratorio.module';
 import { inventaryModule } from './inventary/inventary.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   imports: [
@@ -21,6 +23,9 @@ import { inventaryModule } from './inventary/inventary.module';
       entities: [Patient],
       synchronize: true,
       autoLoadEntities: true,
+    }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'public'), // Ruta a la carpeta de archivos estáticos
     }),
     PatientModule,
     ResultadosLaboratorioModule,
