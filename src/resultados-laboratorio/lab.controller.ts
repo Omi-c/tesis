@@ -1,5 +1,6 @@
 import { Controller, Post, Body } from '@nestjs/common';
 import { TelegramService } from './telegraf.service';
+import { PdfService } from './pdf.service';
 
 @Controller('lab')
 export class LabController {
