@@ -4,7 +4,10 @@ import { PatientService } from './patients.service';
 
 @Controller('patients')
 export class PatientController {
-  constructor(private readonly patientService: PatientService) {}
+  constructor(
+    private readonly patientService: PatientService,
+    private readonly telegramService: TelegramService
+  ) {}
 
   @Get()
   async getAllPatients(): Promise<Patient[]> {
