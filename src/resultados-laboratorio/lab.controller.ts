@@ -14,7 +14,7 @@ export class LabController {
     const pdf = await this.pdfService.generatePdfFromHtml(data.template, filePath);
     const chatId = 1147360782; // Reemplaza esto con el chatId real
     const message = 'Hola desde backend!';
-    await this.telegramService.sendMessage(chatId, message);
+    await this.telegramService.sendPdfDocument(chatId, filePath, caption);
     return true;
   }
 }

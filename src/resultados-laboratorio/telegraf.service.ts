@@ -17,4 +17,9 @@ export class TelegramService {
       console.error('Error sending message:', error);
     }
   }
+
+  async sendPdfDocument(chatId: string, filePath: string, caption: string): Promise<void> {
+    const documentStream = fs.createReadStream(filePath);
+    await this.bot.telegram.sendDocument(chatId, { source: documentStream, filename: 'example.pdf' }, { caption });
+  }
 }
