@@ -6,7 +6,7 @@ import * as PDFDocument from 'pdfkit';
 export class PdfService {
   async generatePdfFromHtml(html: string, filePath: string): Promise<void> {
     const pdfDoc = new PDFDocument();
-    pdfDoc.pipe(fs.createWriteStream(filePath));
+    pdfDoc.pipe(await fs.createWriteStream(filePath));
     pdfDoc.text(html);
     pdfDoc.end();
   }
