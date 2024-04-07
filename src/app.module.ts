@@ -10,6 +10,7 @@ import { ResultadosLaboratorioModule } from './resultados-laboratorio/resultados
 import { inventaryModule } from './inventary/inventary.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { citasModule } from './citas/citas.module';
 
 @Module({
   imports: [
@@ -29,7 +30,8 @@ import { join } from 'path';
     }),
     PatientModule,
     ResultadosLaboratorioModule,
-    inventaryModule
+    inventaryModule,
+    citasModule,
   ],
   controllers: [AppController],
   providers: [AppService],
