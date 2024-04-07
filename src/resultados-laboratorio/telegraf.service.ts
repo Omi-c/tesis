@@ -21,6 +21,6 @@ export class TelegramService {
 
   async sendPdfDocument(chatId: number, filePath: string, caption: string): Promise<void> {
     const documentStream = fs.createReadStream(filePath);
-    await this.bot.telegram.sendDocument(chatId, { source: documentStream, filename: filePath }, { caption });
+    await this.bot.telegram.sendDocument(chatId, { source: documentStream, filename: 'examen.pdf' }, { caption });
   }
 }
