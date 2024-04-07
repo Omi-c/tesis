@@ -1,40 +1,44 @@
 import { Injectable } from '@nestjs/common';
 import * as fs from 'fs';
 import * as PDFDocument from 'pdfkit';
-import QRCode from 'qrcode';
+import * as qrcode from 'qrcode';
+import jsPDF from 'jspdf';
+import { join } from 'path';
 
 @Injectable()
 export class PdfService {
-  async generatePdfFromHtml(html: string, filePath: string): Promise<void> {
-    const pdfDoc = new PDFDocument();
+  async generatePdfFromHtml(data: any, filePath: string): Promise<void> {
+    try {
+      const doc = new jsPDF();
+      let yOffset = 10;
+      doc.setFontSize(12);
+      const fileDocument = `localhost:3001/${filePath}`;
+      const qrCodeDataURL = await qrcode.toDataURL(fileDocument);
+      doc.addImage(qrCodeDataURL, 'PNG', 10, 10, 50, 50);
+      yOffset += 60;
+      doc.text("Resultados de exámenes", 10, yOffset);
+      yOffset += 10;
+      if (data.patient) {
+        const selectedPatientData = data.patient;
+        yOffset += 10; // Separación entre exámenes y datos del paciente
+        doc.text("Información del paciente:", 10, yOffset);
+        yOffset += 10;
+        doc.text(`Nombre: ${selectedPatientData.first_name}`, 10, yOffset);
+        yOffset += 7;
+        doc.text(`Apellido: ${selectedPatientData.last_name}`, 10, yOffset);
+        yOffset += 7;
+        doc.text(`Cédula: ${selectedPatientData.ci_number}`, 10, yOffset);
+        yOffset += 7;
+        doc.text(`Fecha de Nacimiento: ${selectedPatientData.born_date}`, 10, yOffset);
+      }
+      const fullPath = join('src', 'public', filePath);
+      doc.save(fullPath);
+    } catch (error) {
+      console.log(error);
+    }
 
-    // Pipe PDF document to a write stream
-    const writeStream = fs.createWriteStream(filePath);
-    pdfDoc.pipe(writeStream);
-  
-    // Embed QR code into PDF
-    // const qrOptions = {
-    //   type: 'png', // You can change this to other formats like svg
-    //   margin: 2,
-    //   color: {
-    //     dark: '#000', // Dark color
-    //     light: '#fff', // Light color
-    //   },
-    // };
-  
-    // const qrImageBuffer = await QRCode.toBuffer(filePath, qrOptions);
-    // pdfDoc.image(qrImageBuffer, { width: 100, height: 100 });
-  
+
     // Add HTML content
-    pdfDoc.text(html);
-  
-    // End and close the PDF document
-    pdfDoc.end();
-  
-    // Wait for the write stream to finish writing
-    await new Promise<void>((resolve, reject) => {
-      writeStream.on('finish', resolve);
-      writeStream.on('error', reject);
-    });
+
   }
 }

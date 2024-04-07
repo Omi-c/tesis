@@ -25,7 +25,7 @@ import { join } from 'path';
       autoLoadEntities: true,
     }),
     ServeStaticModule.forRoot({
-      rootPath: 'public', // Ruta a la carpeta de archivos estáticos
+      rootPath: join('src', 'public'), // Ruta a la carpeta de archivos estáticos
     }),
     PatientModule,
     ResultadosLaboratorioModule,
@@ -34,4 +34,4 @@ import { join } from 'path';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }
