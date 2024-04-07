@@ -25,7 +25,7 @@ import { join } from 'path';
       autoLoadEntities: true,
     }),
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'public'), // Ruta a la carpeta de archivos estáticos
+      rootPath: 'public', // Ruta a la carpeta de archivos estáticos
     }),
     PatientModule,
     ResultadosLaboratorioModule,
