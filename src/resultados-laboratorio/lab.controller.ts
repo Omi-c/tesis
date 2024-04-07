@@ -1,13 +1,14 @@
 import { Controller, Post, Body } from '@nestjs/common';
 import { TelegramService } from './telegraf.service';
 import { PdfService } from './pdf.service';
+import { join } from 'path';
 
 @Controller('lab')
 export class LabController {
   constructor(
     private readonly telegramService: TelegramService,
     private readonly pdfService: PdfService
-  ) {}
+  ) { }
 
   @Post()
   async createLab(@Body() data: any): Promise<any> {
