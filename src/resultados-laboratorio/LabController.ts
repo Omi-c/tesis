@@ -31,7 +31,7 @@ export class LabController {
         const message = 'Te enviamos un cordial saludo de parte del Laboratorio Clinico Loma Linda Carreño. Aquí te adjuntamos tus resultados de laboratorio.';
         await this.telegramService.sendPdfDocument(chatId, filePath, message);
         await this.labService.create({ path: filePath, patient: data.patient.id });
-        const patient = { email: 'khkj' }; //const patient = data.patient.email;
+        const patient = data.patient;
         const fullPath = join('src', 'public', filePath);
         await this.mailService.sendMail(patient.email, fullPath);
         return true;

@@ -16,8 +16,12 @@ export class CitasService {
   }
 
   findAll(): Promise<Citas[]> {
-    return this.citasRepository.find();
+    return this.citasRepository
+    .createQueryBuilder('citas')
+    .leftJoinAndSelect('citas.patient', 'patient')
+    .getMany();
   }
+
 
   findOne(id: number): Promise<Citas | null> {
     return this.citasRepository.findOneBy({ id });

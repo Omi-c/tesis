@@ -15,4 +15,6 @@ export class Patient {
     born_date: Date;
     @Column()
     mobile: string;
+    @Column()
+    email: string;
 }

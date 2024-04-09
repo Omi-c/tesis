@@ -5,7 +5,7 @@ import * as nodemailer from 'nodemailer';
 export class MailerService {
     async sendMail(recipientEmail: string, filePath: string): Promise<void> {
         try {
-            const senderEmail = 'carlos23alen@outlook.com';
+            const senderEmail = 'LaboratorioClinicoLomaLindaCarreno@outlook.com';
             const storedFormData = '';
             const transporter = nodemailer.createTransport({
                 host: 'smtp.office365.com',
@@ -13,14 +13,14 @@ export class MailerService {
                 secure: false,
                 auth: {
                     user: senderEmail,
-                    pass: 'carlos230673',
+                    pass: 'Laboratorio123.',
                 },
             });
 
             const mailOptions = {
                 from: senderEmail,
                 to: recipientEmail,
-                subject: 'Examen de la clinica',
+                subject: 'Examen de laboratorio',
                 text: JSON.stringify(storedFormData, null, 2),
                 attachments: [
                     {

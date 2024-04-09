@@ -8,6 +8,15 @@ import { join } from 'path';
 @Injectable()
 export class PdfService {
   async generatePdfFromHtml(data: any, filePath: string): Promise<void> {
+    function formatDate(dateString) {
+      const date = new Date(dateString);
+      const day = date.getDate();
+      const month = date.getMonth() + 1; // Se suma 1 porque los meses van de 0 a 11
+      const year = date.getFullYear();
+  
+      return `${day}/${month}/${year}`;
+    }
+
     try {
       const doc = new jsPDF();
       let yOffset = 10;
@@ -20,7 +29,7 @@ export class PdfService {
       yOffset += 10;
       if (data.patient) {
         const selectedPatientData = data.patient;
-        yOffset += 10; // Separación entre exámenes y datos del paciente
+        yOffset += 10; 
         doc.text("Información del paciente:", 10, yOffset);
         yOffset += 10;
         doc.text(`Nombre: ${selectedPatientData.first_name}`, 10, yOffset);
@@ -29,7 +38,7 @@ export class PdfService {
         yOffset += 7;
         doc.text(`Cédula: ${selectedPatientData.ci_number}`, 10, yOffset);
         yOffset += 7;
-        doc.text(`Fecha de Nacimiento: ${selectedPatientData.born_date}`, 10, yOffset);
+        doc.text(`Fecha de Nacimiento: ${formatDate(selectedPatientData.born_date)}`, 10, yOffset);
       }
       const fullPath = join('src', 'public', filePath);
       doc.save(fullPath);

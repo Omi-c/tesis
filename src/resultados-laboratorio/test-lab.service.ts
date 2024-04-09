@@ -17,7 +17,6 @@ export class LabService {
         const lab = new TestLab();
         lab.path = path;
         lab.patient = patient;// await this.patientService.findOne(patient);
-        console.log(lab)
         const patientCreate = this.labRepository.create([lab]);
         return this.labRepository.save(patientCreate);
     }
